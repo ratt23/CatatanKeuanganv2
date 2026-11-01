@@ -25,7 +25,7 @@ export const handler = async (event) => {
     if (event.httpMethod === 'GET') {
       const rows = await sql`
         SELECT id, tanggal, jenis, jumlah, keterangan, created_at
-        FROM transactions
+        FROM transactions_v2
         ORDER BY tanggal ASC, id ASC
       `;
       return {
@@ -71,7 +71,7 @@ export const handler = async (event) => {
         const year = dateObj.getFullYear();
 
         const existing = await sql`
-          SELECT id FROM transactions
+          SELECT id FROM transactions_v2
           WHERE jenis = 'saldo_awal'
             AND EXTRACT(MONTH FROM tanggal) = ${month}
             AND EXTRACT(YEAR FROM tanggal) = ${year}
@@ -81,7 +81,7 @@ export const handler = async (event) => {
         if (existing.length > 0) {
           // Update saldo_awal yang sudah ada di bulan ini
           const updated = await sql`
-            UPDATE transactions
+            UPDATE transactions_v2
             SET jumlah = ${Number(jumlah)}, keterangan = ${keterangan}, tanggal = ${tanggal}
             WHERE id = ${existing[0].id}
             RETURNING *
@@ -96,7 +96,7 @@ export const handler = async (event) => {
 
       // Insert transaksi baru
       const result = await sql`
-        INSERT INTO transactions (tanggal, jenis, jumlah, keterangan)
+        INSERT INTO transactions_v2 (tanggal, jenis, jumlah, keterangan)
         VALUES (${tanggal}, ${jenis}, ${Number(jumlah)}, ${keterangan})
         RETURNING *
       `;
@@ -125,7 +125,7 @@ export const handler = async (event) => {
       }
 
       const result = await sql`
-        DELETE FROM transactions WHERE id = ${Number(id)} RETURNING *
+        DELETE FROM transactions_v2 WHERE id = ${Number(id)} RETURNING *
       `;
 
       if (result.length === 0) {
