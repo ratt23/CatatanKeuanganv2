@@ -7,11 +7,16 @@
   node_bundler = "esbuild"
 
 [[redirects]]
-  from = "/api/transactions"
-  to = "/.netlify/functions/transactions"
+  from = "/api"
+  to = "/.netlify/functions/api"
   status = 200
 
 [[redirects]]
-  from = "/api/transactions/:id"
-  to = "/.netlify/functions/transactions"
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
   status = 200
