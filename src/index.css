@@ -1,0 +1,241 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Base Styles - Windows UI ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #F3F3F3;
+  color: #1a1a1a;
+  min-height: 100vh;
+}
+
+/* ===== Windows-style Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* ===== Windows Spinner ===== */
+.win-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin-win 0.8s linear infinite;
+}
+
+.win-spinner-lg {
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
+}
+
+@keyframes spin-win {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Skeleton Loading ===== */
+.skeleton {
+  background: linear-gradient(90deg, #e5e5e5 25%, #f0f0f0 50%, #e5e5e5 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ===== Toast / Notification Animation ===== */
+.toast-enter {
+  animation: slide-in-toast 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.toast-exit {
+  animation: slide-out-toast 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes slide-in-toast {
+  0% {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes slide-out-toast {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+}
+
+/* ===== Row Animation ===== */
+.row-enter {
+  animation: row-fade-in 0.4s ease-out forwards;
+}
+
+@keyframes row-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+    background-color: #dbeafe;
+  }
+  60% {
+    background-color: #dbeafe;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    background-color: transparent;
+  }
+}
+
+/* ===== Modal Overlay ===== */
+.modal-overlay {
+  animation: modal-bg-in 0.2s ease-out forwards;
+}
+
+@keyframes modal-bg-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.modal-content {
+  animation: modal-scale-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes modal-scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ===== Card Hover Effect ===== */
+.card-hover {
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.card-hover:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+/* ===== Button Styles ===== */
+.btn-win-primary {
+  background-color: #0078D4;
+  color: white;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-win-primary:hover {
+  background-color: #0067C0;
+  box-shadow: 0 1px 4px rgba(0, 120, 212, 0.3);
+}
+
+.btn-win-primary:active {
+  background-color: #005a9e;
+  transform: scale(0.98);
+}
+
+.btn-win-primary:disabled {
+  background-color: #a0c4e8;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-win-secondary {
+  background-color: #FFFFFF;
+  color: #1a1a1a;
+  border: 1px solid #E5E5E5;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-win-secondary:hover {
+  background-color: #F5F5F5;
+  border-color: #d0d0d0;
+}
+
+.btn-win-secondary:active {
+  background-color: #E8E8E8;
+  transform: scale(0.98);
+}
+
+/* ===== Input Focus Ring - Windows Style ===== */
+.input-win {
+  border: 1px solid #E5E5E5;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input-win:focus {
+  outline: none;
+  border-color: #0078D4;
+  box-shadow: 0 0 0 1px #0078D4;
+}
+
+/* ===== Table Styles ===== */
+.table-zebra tbody tr:nth-child(even) {
+  background-color: #FAFAFA;
+}
+
+.table-zebra tbody tr:hover {
+  background-color: #F0F4FF;
+}
+
+/* ===== Number Input: Hide Spinners ===== */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .mobile-full {
+    width: 100%;
+  }
+}
